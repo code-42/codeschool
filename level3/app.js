@@ -1,19 +1,12 @@
-var http = require('http');
+// challenge 3.3 File Piping
+// use pipe() to read from the stream
+// and write directly to process.stdout
+// first, remove the readable handler
 
-http.createServer(function(request,response){
-    response.writeHead(200);
-    // request.on('readable', function(){
-    //     var chunk = null;
-    //     while(null !== (chunk = request.read())){
-    //         // console.log(chunk.toString());
-    //         response.write(chunk);
-    //     }
-    // });
-    // request.on('end', function(){
-    //     respose.end();
-    // });  
-    // all the above code replaced with one line - pipe()
-    request.pipe(response);
-}).listen(8080);
 
-console.log("Server listening on port 8080...");
+var fs = require('fs');
+
+// create a Readable stream for fruits.txt
+var file = fs.createReadStream('fruits.txt');
+file.pipe(process.stdout);
+
