@@ -1,14 +1,15 @@
-// challenge 3.4 Fixing Pipe
-// add option to keep writable stream open 
+// challenge 3.5 Download Server
+// create an HTTP server that will serve index.html 
 
 var fs = require('fs');
+var http = require('http');
 
-// create a Readable stream for fruits.txt
-var file = fs.createReadStream('fruits.txt');
-var destFile = fs.createWriteStream('destination.txt');
+http.createServer(function(request, response) {
+  response.writeHead(200, {'Content-Type': 'text/html'});
 
-file.pipe(destFile, { end: false });
+  var file = fs.createReadStream('index.html');
 
-file.on('end', function(){
-    destFile.end('Finished!');
-})
+// Use pipe() to send index.html to the response. 
+  file.pipe(response);
+  
+}).listen(8080);
