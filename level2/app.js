@@ -1,17 +1,18 @@
-var events = require('events');
-var EventEmitter = events.EventEmitter;
+var http = require('http');
+var server = http.createServer();
 
-var chat = new EventEmitter();
-var users = [], chatlog = [];
-
-chat.on('message', function(message) {
-  chatlog.push(message);
+server.on('request', function(request, response) {
+  response.writeHead(200);
+  response.write("Hello, this is dog");
+  response.end();
 });
 
-chat.on('join', function(nickname) {
-  users.push(nickname);
+server.on('request', function(request, response) {
+  console.log("New request coming in...");
 });
 
-// Emit events here
-chat.emit('join', 'custom message');
-chat.emit('message', 'another message');
+server.on('close', function(){
+  console.log("Closing down the server...");
+});
+
+server.listen(8080);
