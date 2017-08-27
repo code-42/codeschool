@@ -1,12 +1,14 @@
-// challenge 3.3 File Piping
-// use pipe() to read from the stream
-// and write directly to process.stdout
-// first, remove the readable handler
-
+// challenge 3.4 Fixing Pipe
+// add option to keep writable stream open 
 
 var fs = require('fs');
 
 // create a Readable stream for fruits.txt
 var file = fs.createReadStream('fruits.txt');
-file.pipe(process.stdout);
+var destFile = fs.createWriteStream('destination.txt');
 
+file.pipe(destFile, { end: false });
+
+file.on('end', function(){
+    destFile.end('Finished!');
+})
