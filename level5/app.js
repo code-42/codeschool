@@ -1,25 +1,31 @@
-// 5.6 Doing the Request 240 pts
+// 5.7 Express Server 250 pts
 
-// Next, we'll use the request module to make a simple web request 
-//and log the response to the console. You can use this example in the README.
-// To start, require the request module and assign the return function to a variable.
-// Next, issue a request to searchURL. Remember, the callback function for the 
-// request function takes three arguments: error, response and body.
-// Finally, log the response body to the console using console.log().
+// Now, let's create an Express server which queries out 
+// for the search term and then returns the JSON.
+// Task 1/5 Require the express module.
+// Task 2/5 Create the Express server and name it app.
+// Task 3/5 Create a route for GET requests to / (root path). 
+// Remember, the callback function takes two arguments: a request req and a response res.
+// Task 4/5 In our new route, issue a request to searchURL and pipe the results into the response.
+// Task 5/5 Finally, tell app to listen on port 8080.
 
 var url = require('url');
+var request = require('request');
+var express = require('express');
+var app = express();
 
 var options = {
   protocol: "http:",
   host: "search.twitter.com",
   pathname: '/search.json',
-  query: { q: "codeschool"}
+  query: {
+    q: "codeschool"
+  }
 };
 
 var searchURL = url.format(options);
-
-var request = require('request');
-
-request(searchURL, function(error, response, body){
-  console.log(body);
+app.get('/', function(req, res){
+  request(searchURL).pipe(res);
 });
+var app; // Create server here
+app.listen(8080);
