@@ -1,0 +1,17 @@
+<!--
+6.3 Client socket.io Setup 250 pts
+
+In our html file, load the socket.io.js script and connect to the socket.io server.
+
+Load the socket.io.js script. The socket.io.js path you should use is '/socket.io/socket.io.js'. 
+Express knows to serve the socket.io client js for this path.
+
+Using the global io object that's now available for us, 
+connect to the socket.io server at http://localhost:8080.
+-->
+
+<script src = '/socket.io/socket.io.js'></script>
+<script>
+  // use the socket.io server to connect to localhost:8080 here
+  var socket = io.connect('http://localhost:8080');
+</script>
