@@ -9,3 +9,18 @@
 var redis = require('redis');
 var client = redis.createClient();
 client.set('name', 'Me');
+
+// 7.3 Get A Key 250 pts
+
+// We have already stored a value in the question key. Use the redis client to 
+// issue a get command to redis to retrieve and then log the value.
+
+// Task 1/2 Use the redis client to issue a get command using the 'question' key to retrieve a value. 
+// Remember, the get function takes a callback which expects two arguments, error and data.
+// Task 2/2 Log the value retrieved with console.log.
+
+var redis = require('redis');
+var client = redis.createClient();
+client.get('question', function(error, data){
+  console.log(data);
+});
